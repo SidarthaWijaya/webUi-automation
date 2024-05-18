@@ -17,3 +17,7 @@ Langkah-langkah
 3. jalankan perintah ./gradlew clean built
 4. pada folder Stefdefination buka file LoginSteps.java kemudian atur path gechko yang tersimpan pada pc atau komputer
 5. kemudian running file pada folder features di file login.feature
+
+
+berikut adalah contoh ketika project dijalankan
+<img width="1512" alt="Screenshot 2024-05-18 at 14 41 15" src="https://github.com/SidarthaWijaya/webUi-automation/assets/66309126/5ec3defe-b8cb-4812-aa1f-9061a3e16952">
