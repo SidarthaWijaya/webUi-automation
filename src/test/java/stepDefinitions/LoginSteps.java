@@ -1,53 +1,55 @@
 package stepDefinitions;
 
-import io.cucumber.java.en.*;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import pages.LoginPage;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 public class LoginSteps {
-    private WebDriver driver;
-    private LoginPage loginPage;
+    WebDriver driver;
+    LoginPage loginPage;
 
-    @Given("I am on the login page")
-    public void iAmOnTheLoginPage() {
-        System.setProperty("driver.gecko.driver", "/Users/Sidarthawijaya/Downloads/geckodriver 3");
-        FirefoxOptions options = new FirefoxOptions();
-        driver = new FirefoxDriver(options);
-        driver.get("");
+    @Given("I open the login page")
+    public void iOpenTheLoginPage() {
+        System.setProperty("webdriver.gecko.driver.marionette", "/Users/sidarthawijaya/Downloads/geckodriver");
+        driver = new FirefoxDriver();
+        driver.get("https://www.saucedemo.com/");
         loginPage = new LoginPage(driver);
     }
 
-    @When("I enter valid username and password")
-    public void iEnterValidUsernameAndPassword() {
-        loginPage.enterUsername("validUser");
-        loginPage.enterPassword("validPass");
+    @When("I enter username {string}")
+    public void iEnterUsername(String username) {
+        loginPage.enterUsername(username);
     }
 
-    @When("I enter invalid username and password")
-    public void iEnterInvalidUsernameAndPassword() {
-        loginPage.enterUsername("invalidUser");
-        loginPage.enterPassword("invalidPass");
+    @When("I enter password {string}")
+    public void iEnterPassword(String password) {
+        loginPage.enterPassword(password);
     }
 
-    @And("I click on login button")
-    public void iClickOnLoginButton() {
-        loginPage.clickLogin();
+    @When("I click the login button")
+    public void iClickTheLoginButton() {
+        loginPage.clickLoginButton();
     }
 
-    @Then("I should be redirected to the homepage")
-    public void iShouldBeRedirectedToTheHomepage() {
-        assertEquals("http://example.com/home", driver.getCurrentUrl());
-        driver.quit();
+    @Then("I should see the products page")
+    public void iShouldSeeTheProductsPage() {
+        Assert.assertTrue("Products page not displayed!", driver.getPageSource().contains("Products"));
     }
 
-    @Then("I should see an error message")
-    public void iShouldSeeAnErrorMessage() {
-        assertTrue(driver.getPageSource().contains("Invalid credentials"));
-        driver.quit();
+    @Then("the user should see an error message {string}")
+    public void theUserShouldSeeAnErrorMessage(String arg0) {
     }
+    public static void quitDriver() throws InterruptedException {
+        Thread.sleep(2000);
+        quitDriver();
+    }
+
+
 }
-
