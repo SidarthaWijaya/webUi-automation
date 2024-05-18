@@ -42,7 +42,7 @@ jobs:
 
       #gradle
     - name: setup gradlew
-      run: chmd +x gradlew
+      run: chmod +x gradlew
 
     - name: execute
       run: ./gradlew cucumber
