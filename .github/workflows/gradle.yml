@@ -46,9 +46,20 @@ jobs:
 
     - name: execute
       run: ./gradlew test
- 
+
+    #artefak
+    - name: artifak
+      uses: actions/upload-artifact@v4.3.3
+      if: always()
+      with:
+        name: cucumber-report
+        path: target
 
 
-   
-    - name: Generate and submit dependency graph
-      uses: gradle/actions/dependency-submission@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+    #deploy to github pages
+    - name: deploy report to github pages
+      if: always()
+      uses: peaceiris/actions-github-pages@v3.1.12
+      with:
+        Publish_token: ${{secret.GITHUB_TOKEN}}
+        Publish_Dir: reports
