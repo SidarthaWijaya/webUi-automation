@@ -27,12 +27,16 @@ dependencies {
 
 }
 
-test {
+test  (){
     useJUnitPlatform()
     systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
+
+    outputs.upToDateWhen { false } // Ensure the tests are always run
+    systemProperty "cucumber.plugin", "pretty, html:build/target/cucumber-report.html"
 }
 configurations {
     cucumberRuntime {
         extendsFrom testImplementation
     }
 }
+

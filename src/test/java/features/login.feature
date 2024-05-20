@@ -1,6 +1,6 @@
 Feature: Login Functionality
 
-  @web
+  @login
   Scenario: Successful login
     Given I open the login page
     When I enter username "standard_user"
@@ -14,7 +14,7 @@ Feature: Login Functionality
       When I enter username "locked_out_user"
       And I enter password "secret_sauce"
       And I click the login button
-      Then the user should see an error message
+      Then the user should see an error message "invalid credential"
 
       @web
       Scenario: Boundary test with empty username and valid password

@@ -10,7 +10,8 @@ import org.junit.runner.RunWith;
         glue = {"stepDefinitions"},
         features = {"src/test/java/features"},
         tags = "@api",
-        monochrome = true
+        monochrome = true,
+        publish = true
+
 )
-public class TestRunner {
-}
+public class TestRunner { }
