@@ -27,9 +27,7 @@ jobs:
 
     # Setup Geckodriver with a specific version
     - name: Setup Geckodriver
-      uses: browser-actions/setup-geckodriver@v2
-      with:
-        version: '0.32.0'  # specify a compatible version
+      uses: browser-actions/setup-geckodriver@v0.0.0
 
 
       #gradle
