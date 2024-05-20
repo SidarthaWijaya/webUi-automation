@@ -8,7 +8,7 @@ Feature: Login Functionality
     And I click the login button
     Then I should see the products page
 
-    @web
+    @login
     Scenario: Unsuccessful login with invalid credentials
       Given I open the login page
       When I enter username "locked_out_user"
@@ -16,7 +16,7 @@ Feature: Login Functionality
       And I click the login button
       Then the user should see an error message "invalid credential"
 
-      @web
+      @login
       Scenario: Boundary test with empty username and valid password
         Given I open the login page
         When I enter username ""
@@ -24,7 +24,7 @@ Feature: Login Functionality
         And I click the login button
         Then the user should see an error message "username empty"
 
-      @web
+      @login
       Scenario: Boundary test with valid username and empty password
         Given I open the login page
         When I enter username "standard_user"
