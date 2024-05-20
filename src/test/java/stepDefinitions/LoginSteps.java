@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import pages.LoginPage;
 
 import static org.junit.Assert.assertNotNull;
@@ -18,6 +19,9 @@ public class LoginSteps {
     @Given("I open the login page")
     public void iOpenTheLoginPage() {
         System.setProperty("webdriver.gecko.driver.marionette", "/Users/sidarthawijaya/Downloads/geckodriver");
+        FirefoxOptions opts = new FirefoxOptions();
+        opts.addArguments("--headless");
+        
         driver = new FirefoxDriver();
         driver.get("https://www.saucedemo.com/");
         loginPage = new LoginPage(driver);
