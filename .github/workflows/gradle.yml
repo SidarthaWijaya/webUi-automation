@@ -21,17 +21,21 @@ jobs:
         distribution: 'temurin'
 
 
+# Install Firefox
+    - name: Install Firefox
+      run: sudo apt-get install -y firefox
 
-      #install driver
+    # Setup Geckodriver with a specific version
     - name: Setup Geckodriver
       uses: browser-actions/setup-geckodriver@v0.0.0
+
 
       #gradle
     - name: setup gradlew
       run: chmod +x gradlew
 
     - name: execute
-      run: ./gradlew test
+      run: ./gradlew cucumber
 
     #artefak
     - name: artifak
