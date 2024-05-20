@@ -20,6 +20,12 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+
+
+      #install driver
+    - name: Setup Geckodriver
+      uses: browser-actions/setup-geckodriver@v0.0.0
+
       #gradle
     - name: setup gradlew
       run: chmod +x gradlew
