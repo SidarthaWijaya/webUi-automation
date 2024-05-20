@@ -31,7 +31,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: execute
-      run: ./gradlew test
+      run: ./gradlew cucumber
 
     #artefak
     - name: artifak
