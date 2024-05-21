@@ -1,13 +1,13 @@
 package pages;
 
 import org.openqa.selenium.By;
-
-import java.util.Objects;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static helper.Utility.driver;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WebPage {
+
 
     By input_username = By.id("user-name");
     By input_pwd = By.id("password");
@@ -20,6 +20,19 @@ public class WebPage {
     By sortItemHilo = By.xpath("//option[@value=\"hilo\"]");
     By sortItemZtoA = By.xpath("//option[@value=\"za\"]");
     By firstItem = By.xpath("(//*[@class=\"inventory_item_name \"])[1]");
+    By cartIcon = By.className("shopping_cart_link");
+    By checkoutButton = By.id("checkout");
+    By firstNameField = By.id("first-name");
+    By lastNameField = By.id("last-name");
+    By zipCodeField = By.id("postal-code");
+    By continueButton = By.id("continue");
+    By finishButton = By.id("finish");
+    By checkoutCompleteContainer = By.id("checkout_complete_container");
+    By checkoutOverviewTitle = By.xpath("//span[contains(text(),'Checkout: Overview')]");
+
+
+
+
 
     By err_msg(String errmsg) {
         return By.xpath("//*[contains(text(),' " + errmsg + "')]");
@@ -39,7 +52,7 @@ public class WebPage {
 
     public void clickBtnLogin() {
         driver.findElement(btn_login).click();
-        ;
+
     }
 
     public void verifyIconCart() {
@@ -84,4 +97,44 @@ public class WebPage {
 
         assertThat(itemBefore).isNotEqualTo(itemAfter);
     }
+
+    public void clickcart(){
+        driver.findElement(cartIcon).click();
+    }
+
+
+    public void clickCheckout() {
+        driver.findElement(checkoutButton).click();
+    }
+
+
+    public void inputFirstName(String firstName) {
+        driver.findElement(firstNameField).sendKeys(firstName);
+    }
+
+    public void inputLastName(String lastName) {
+        driver.findElement(lastNameField).sendKeys(lastName);
+    }
+
+    public void inputZipCode(String zipCode) {
+        driver.findElement(zipCodeField).sendKeys(zipCode);
+    }
+
+    public void clickContinue() {
+        driver.findElement(continueButton).click();
+    }
+
+    public void clickFinish() {
+        driver.findElement(finishButton).click();
+    }
+
+
+    public boolean isOnCheckoutOverviewPage() {
+        return driver.findElement(By.xpath("//span[contains(text(),'Checkout: Overview')]")).isDisplayed();
+    }
+
+    public boolean isOnCheckoutCompletePage() {
+        return driver.findElement(By.xpath("//h2[contains(text(),'THANK YOU FOR YOUR ORDER')]")).isDisplayed();
+    }
 }
+

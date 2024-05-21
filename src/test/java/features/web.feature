@@ -65,3 +65,24 @@ Feature: Test Automation Web
     And user click login button
     Then user verify see cart icon
     And user click sort item Z to A
+
+
+    @web
+    Scenario: Successful login, add product to cart, and proceed to checkout
+      Given user go to login page
+      And user input username "standard_user"
+      And user input pwd "secret_sauce"
+      And user click login button
+      Then user verify see cart icon
+      And user click add to cart
+      And user click add to cart
+      Then verify cart item has "2"
+      And user click cart
+      And  user click checkout button
+
+      And user inputs first name
+      And  user inputs last name
+      And user inputs zipcode
+      And user clicks continue
+      Then  user should be on the checkout overview page
+      And user clicks finish
