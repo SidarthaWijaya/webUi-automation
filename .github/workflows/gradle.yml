@@ -8,48 +8,37 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-   
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+      - uses: actions/checkout@v3
 
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
 
-# Install Firefox
-    - name: Install Firefox
-      run: sudo apt-get install -y firefox
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v0.0.0
 
-    # Setup Geckodriver with a specific version
-    - name: Setup Geckodriver
-      uses: browser-actions/setup-geckodriver@v0.0.0
+      - name: Setup gradlew
+        run: chmod +x gradlew
 
+      - name: Execute Web Test
+        run: ./gradlew webTest
 
-      #gradle
-    - name: setup gradlew
-      run: chmod +x gradlew
+      #artefak
+      - name: artifak
+        uses: actions/upload-artifact@v4.3.3
+        if: always()
+        with:
+          name: cucumber-report
+          path: target
 
-    - name: execute
-      run: ./gradlew cucumber
-
-    #artefak
-    - name: artifak
-      uses: actions/upload-artifact@v4.3.3
-      if: always()
-      with:
-        name: cucumber-report
-        path: target
-
-
-    #deploy to github pages
-    - name: deploy report to github pages
-      if: always()
-      uses: peaceiris/actions-gh-pages@v4.0.0
-      with:
-        PERSONAL_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        Publish_Dir: target
+      #deploy to github pages
+      - name: deploy report to github pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4.0.0
+        with:
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          Publish_Dir: target

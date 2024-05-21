@@ -28,30 +28,26 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    systemProperty 'cucumber.filter.tags', System.getProperty('cucumber.filter.tags')
-
-    outputs.upToDateWhen { false } // Ensure the tests are always run
-    systemProperty 'cucumber.plugin', 'pretty, html:build/target/cucumber-report.html'
+    systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
 }
-
 configurations {
     cucumberRuntime {
         extendsFrom testImplementation
     }
 }
 
-task cucumber {
+tasks.register('webTest') {
     dependsOn assemble, testClasses
     doLast {
         javaexec {
-            main = 'io.cucumber.core.cli.Main'
+            main = "io.cucumber.core.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = [
                     '--plugin', 'pretty',
-                    '--plugin', 'html:target/cucumber-report.html',
-                    '--glue', 'stepDefinitions',
-                    'src/test/resources'
-            ]
+                    '--plugin', 'html:reports/cucumber-web-report.html',
+                    '--glue', 'stepDef',
+                    '--tags', "@web",
+                    'src/test/java/features']
         }
     }
 }
